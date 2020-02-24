@@ -6,7 +6,7 @@
 class Pawn : public Piece {
   public:
 	Pawn(Color color, Position position);
-	char get_name();
+	string get_name() const;
 
   private:
 };

@@ -3,9 +3,9 @@
 Pawn::Pawn(Color color, Position position) : Piece(color, position) {
 }
 
-char Pawn::get_name() {
+string Pawn::get_name() const {
 	if (this->get_color() == WHITE) {
-		return '\u2659';
+		return "\u2659";
 	}
-	return '\u265F';
+	return "\u265F";
 }

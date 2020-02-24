@@ -1,10 +1,10 @@
 #include "engine/piece/Piece.h"
 #include "engine/piece/Color.h"
 
-Color Piece::get_color() {
-	return this->color;
+Piece::Piece(Color color, Position position)
+	: color(color), position(position) {
 }
 
-char Piece::get_name() {
-	return this->name;
+Color Piece::get_color() const {
+	return this->color;
 }

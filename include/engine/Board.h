@@ -6,6 +6,7 @@
 class Board {
   public:
 	Board();
+	void print();
 
   private:
 	Piece *grid[8][8];

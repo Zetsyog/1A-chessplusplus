@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
 		game.play();
 	}
 	*/
+	game.print();
 
 	return 0;
 }
