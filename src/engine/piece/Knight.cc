@@ -16,13 +16,14 @@ string Knight::get_name() const {
 	return "\u265E";
 }
 
-bool Knight::is_move_legal(Position const &pos, bool target_empty) {
-	if (abs(pos.get_x() - get_position().get_x()) == 1 &&
-		abs(pos.get_y() - get_position().get_y()) == 2) {
+bool Knight::is_move_legal(Position const &dest, Board const &board,
+						   bool target_empty) {
+	if (abs(dest.get_x() - get_position().get_x()) == 1 &&
+		abs(dest.get_y() - get_position().get_y()) == 2) {
 		return true;
 	}
-	if (abs(pos.get_x() - get_position().get_x()) == 2 &&
-		abs(pos.get_y() - get_position().get_y()) == 1) {
+	if (abs(dest.get_x() - get_position().get_x()) == 2 &&
+		abs(dest.get_y() - get_position().get_y()) == 1) {
 		return true;
 	}
 	return false;

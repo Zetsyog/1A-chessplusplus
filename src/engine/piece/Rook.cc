@@ -16,7 +16,8 @@ string Rook::get_name() const {
 	return "\u265C";
 }
 
-bool Rook::is_move_legal(Position const &pos, bool target_empty) {
-	return get_position().get_x() == pos.get_x() ||
-		   get_position().get_y() == pos.get_y();
+bool Rook::is_move_legal(Position const &dest, Board const &board,
+						 bool target_empty) {
+	return get_position().get_x() == dest.get_x() ||
+		   get_position().get_y() == dest.get_y();
 }

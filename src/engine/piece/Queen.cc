@@ -16,13 +16,14 @@ string Queen::get_name() const {
 	return "\u265B";
 }
 
-bool Queen::is_move_legal(Position const &pos, bool target_empty) {
-	if (get_position().get_x() == pos.get_x() ||
-		get_position().get_y() == pos.get_y()) {
+bool Queen::is_move_legal(Position const &dest, Board const &board,
+						  bool target_empty) {
+	if (get_position().get_x() == dest.get_x() ||
+		get_position().get_y() == dest.get_y()) {
 		return true;
 	}
-	if (abs(pos.get_x() - get_position().get_x()) ==
-		abs(pos.get_y() - get_position().get_y())) {
+	if (abs(dest.get_x() - get_position().get_x()) ==
+		abs(dest.get_y() - get_position().get_y())) {
 		return true;
 	}
 	return false;

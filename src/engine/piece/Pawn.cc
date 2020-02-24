@@ -13,16 +13,18 @@ string Pawn::get_name() const {
 	return "\u265F";
 }
 
-bool Pawn::is_move_legal(Position const &pos, bool target_empty) {
-	cout << this->was_moved() << endl;
+bool Pawn::is_move_legal(Position const &pos, Board const &board,
+						 bool target_empty) {
 	if (target_empty) {
 		if (!this->was_moved() &&
 			pos == this->get_position() + Position(0, this->get_color() * 2)) {
-			cout << "pawn was never moved" << endl;
-			return true;
+			return board.is_straight_path_clear(get_position(), pos);
 		} else {
-			return pos ==
-				   this->get_position() + Position(0, this->get_color() * 1);
+			if (pos ==
+				this->get_position() + Position(0, this->get_color() * 1)) {
+				return board.is_straight_path_clear(get_position(), pos);
+			}
+			return false;
 		}
 	}
 	return pos == this->get_position() + Position(1, this->get_color() * 1) ||

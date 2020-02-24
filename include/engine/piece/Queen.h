@@ -8,7 +8,8 @@ class Queen : public Piece {
 	Queen(Color color, Position position);
 	Queen(Color color);
 	string get_name() const;
-	bool is_move_legal(Position const &dest, bool target_empty);
+	bool is_move_legal(Position const &dest, Board const &board,
+					   bool target_empty);
 };
 
 #endif

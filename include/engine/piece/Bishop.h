@@ -8,7 +8,8 @@ class Bishop : public Piece {
 	Bishop(Color color, Position position);
 	Bishop(Color color);
 	string get_name() const;
-	bool is_move_legal(Position const &dest, bool target_empty);
+	bool is_move_legal(Position const &dest, Board const &board,
+					   bool target_empty);
 };
 
 #endif

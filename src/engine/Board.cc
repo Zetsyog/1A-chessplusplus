@@ -6,6 +6,7 @@
 #include "engine/piece/Queen.h"
 #include "engine/piece/Rook.h"
 #include "engine/util/Position.h"
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -65,12 +66,18 @@ void Board::set(Position const &position, Piece *piece) {
 	}
 }
 
-Piece *Board::get(Position const &position) {
+Piece *Board::get(Position const &position) const {
+	if (position.get_x() < 0 || position.get_x() > 7)
+		return nullptr;
+	if (position.get_y() < 0 || position.get_y() > 7)
+		return nullptr;
+
 	return this->grid[position.get_x()][position.get_y()];
 }
 
 void Board::remove_piece(Position const &position) {
-	delete get(position);
+	if (get(position) != nullptr)
+		delete get(position);
 	set(position, nullptr);
 }
 
@@ -84,7 +91,7 @@ bool Board::move(Position const &from, Position const &to) {
 		return false;
 	}
 
-	if (!target->is_move_legal(to, this->get(to) == nullptr)) {
+	if (!target->is_move_legal(to, const this, this->get(to) == nullptr)) {
 		cerr << "illegal move" << endl;
 		return false;
 	}
@@ -92,6 +99,52 @@ bool Board::move(Position const &from, Position const &to) {
 	this->remove_piece(to);
 	this->set(to, target);
 	this->set(from, nullptr);
+
+	return true;
+}
+
+bool Board::is_straight_path_clear(Position const &from,
+								   Position const &to) const {
+	if (from.get_x() != to.get_x() && from.get_y() != to.get_y()) {
+		return false;
+	}
+
+	if (from.get_x() == to.get_x()) {
+		int distance = abs(to.get_x() - from.get_x());
+		int dir = (to.get_x() - from.get_x()) / distance;
+
+		for (int i = 1; i < distance; i++) {
+			if (this->get(from + Position(dir * i, 0)) != nullptr) {
+				return false;
+			}
+		}
+	} else {
+		int distance = abs(to.get_y() - from.get_y());
+		int dir = (to.get_y() - from.get_y()) / distance;
+
+		for (int i = 1; i < distance; i++) {
+			if (this->get(from + Position(dir * i, 0)) != nullptr) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool Board::is_diag_path_clear(Position const &from, Position const &to) const {
+	if (abs(to.get_x() - from.get_x()) != abs(to.get_y() - from.get_y())) {
+		return false;
+	}
+
+	int distance = abs(to.get_x() - from.get_x());
+	int x_dir = (to.get_x() - from.get_x()) / distance;
+	int y_dir = (to.get_y() - from.get_y()) / distance;
+
+	for (int i = 1; i < distance; i++) {
+		if (this->get(from + Position(x_dir * i, y_dir * i)) != nullptr) {
+			return false;
+		}
+	}
 
 	return true;
 }
