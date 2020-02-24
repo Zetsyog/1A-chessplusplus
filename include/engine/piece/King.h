@@ -1,12 +1,12 @@
-#ifndef PAWN_H
-#define PAWN_H
+#ifndef KING_H
+#define KING_H
 
 #include "engine/piece/Piece.h"
 
-class Pawn : public Piece {
+class King : public Piece {
   public:
-	Pawn(Color color, Position position);
-	Pawn(Color color);
+	King(Color color, Position position);
+	King(Color color);
 	string get_name() const;
 	bool is_move_legal(Position const &dest, bool target_empty);
 };
