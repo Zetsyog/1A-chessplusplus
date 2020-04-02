@@ -10,15 +10,15 @@ if [ $level -lt 4 ]; then
 	exit 1
 fi
 
-CHESS_PROG="../niveau5/echecs"
+CHESS_PROG="../bin/echecs"
 LOG="test.log"
 
-leg_games="${level}-leg-*"
-ill_games="${level}-ill-*"
+leg_games="parties/${level}-leg-*"
+ill_games="parties/${level}-ill-*"
 
 for g in $leg_games $ill_games
 do
-	>&2 echo "* Testing ========== $g "
+	>&2 echo "* Testing ====niveau $level====== $g "
 	grep -v "#" $g | $CHESS_PROG > $LOG
 	# test du exit code
 	if [ $? -ne 0 ]; then

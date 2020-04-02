@@ -91,7 +91,12 @@ bool Board::move(Position const &from, Position const &to) {
 		return false;
 	}
 
-	if (!target->is_move_legal(to, const this, this->get(to) == nullptr)) {
+	if (this->get(to) != nullptr &&
+		target->get_color() == this->get(to)->get_color()) {
+		return false;
+	}
+
+	if (!target->is_move_legal(to, this, this->get(to) == nullptr)) {
 		cerr << "illegal move" << endl;
 		return false;
 	}
@@ -109,7 +114,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		return false;
 	}
 
-	if (from.get_x() == to.get_x()) {
+	if (from.get_y() == to.get_y()) {
 		int distance = abs(to.get_x() - from.get_x());
 		int dir = (to.get_x() - from.get_x()) / distance;
 

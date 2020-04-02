@@ -14,6 +14,7 @@ class Game {
   private:
 	Board board;
 	bool running;
+	Color next_team;
 
 	bool execute_command(Command const &command);
 };

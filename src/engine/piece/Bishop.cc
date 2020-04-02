@@ -16,7 +16,7 @@ string Bishop::get_name() const {
 	return "\u265D";
 }
 
-bool Bishop::is_move_legal(Position const &dest, Board const &board,
+bool Bishop::is_move_legal(Position const &dest, Board *board,
 						   bool target_empty) {
 	if (abs(dest.get_x() - get_position().get_x()) ==
 		abs(dest.get_y() - get_position().get_y())) {

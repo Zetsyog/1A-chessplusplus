@@ -12,7 +12,6 @@ Position Piece::get_position() {
 void Piece::set_position(Position const &position) {
 	if (position != this->get_position()) {
 		this->moved = true;
-		cout << "hey" << endl;
 	}
 	this->position.set(position);
 }

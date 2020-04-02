@@ -8,8 +8,8 @@ class Pawn : public Piece {
 	Pawn(Color color, Position position);
 	Pawn(Color color);
 	string get_name() const;
-	bool is_move_legal(Position const &dest, Board const &board,
-					   bool target_empty);
+	virtual bool is_move_legal(Position const &position, Board *board,
+							   bool target_empty);
 };
 
 #endif

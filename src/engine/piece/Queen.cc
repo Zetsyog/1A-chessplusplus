@@ -16,7 +16,7 @@ string Queen::get_name() const {
 	return "\u265B";
 }
 
-bool Queen::is_move_legal(Position const &dest, Board const &board,
+bool Queen::is_move_legal(Position const &dest, Board *board,
 						  bool target_empty) {
 	if (get_position().get_x() == dest.get_x() ||
 		get_position().get_y() == dest.get_y()) {

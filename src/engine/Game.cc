@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Game::Game() : running(true) {
+Game::Game() : board(), running(true), next_team(WHITE) {
 }
 
 bool Game::is_running() {
@@ -18,17 +18,25 @@ void Game::print() {
 void Game::play() {
 	Command command;
 
-	cout << "Your move." << endl;
+	cout << (next_team == WHITE ? "White" : "Black") << " team, your move."
+		 << endl;
 
 	while (!command.parse() || !this->execute_command(command)) {
-		cout << "Invalid command. Please try again." << endl;
+		cerr << "Invalid command. Please try again." << endl;
 	}
+
+	next_team = next_team == WHITE ? BLACK : WHITE;
 }
 
 bool Game::execute_command(Command const &command) {
 	if (command.str == "/quit") {
 		this->running = false;
 		return true;
+	}
+
+	if (this->board.get(command.from) != nullptr &&
+		this->board.get(command.from)->get_color() != next_team) {
+		return false;
 	}
 
 	return this->board.move(command.from, command.to);
