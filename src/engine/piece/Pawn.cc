@@ -20,14 +20,13 @@ bool Pawn::is_move_legal(Position const &pos, Board *board, bool target_empty) {
 				this->get_position() + Position(0, this->get_color() * 2)) {
 				return board->is_straight_path_clear(get_position(), pos);
 			}
-		} else {
-			if (pos ==
-				this->get_position() + Position(0, this->get_color() * 1)) {
-				return board->is_straight_path_clear(get_position(), pos);
-			}
-			return false;
 		}
+		if (pos == this->get_position() + Position(0, this->get_color() * 1)) {
+			return board->is_straight_path_clear(get_position(), pos);
+		}
+		return false;
 	}
+
 	return pos == this->get_position() + Position(1, this->get_color() * 1) ||
 		   pos == this->get_position() + Position(-1, this->get_color() * 1);
 }

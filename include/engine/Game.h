@@ -7,7 +7,15 @@
 class Game {
   public:
 	Game();
+
+	/**
+	 * @return whether the game is running or not
+	 */
 	bool is_running();
+
+	/**
+	 * Print the current state of the game in standard output
+	 */
 	void print();
 	void play();
 

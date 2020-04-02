@@ -15,12 +15,9 @@ OBJECTS  := $(SOURCES:$(SRCDIR)/%.cc=$(OBJDIR)/%.o)
 
 all: $(BINDIR)/$(TARGET)
 
-$(BINDIR)/$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS)  -o $@
+$(BINDIR)/$(TARGET): $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES) -I$(INCLUDEDIR) -o $@
 
-$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cc
-	mkdir -p $(dir $@)
-	$(CC) -g -o $@ -c $< $(CFLAGS) -I$(INCLUDEDIR)
 
 clean:
 	rm -f $(BINDIR)/$(TARGET)

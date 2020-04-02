@@ -84,8 +84,6 @@ void Board::remove_piece(Position const &position) {
 bool Board::move(Position const &from, Position const &to) {
 	Piece *target = this->get(from);
 
-	cout << "Moving " << from << " to " << to << endl;
-
 	if (target == nullptr) {
 		cerr << "invalid target" << endl;
 		return false;
@@ -101,9 +99,13 @@ bool Board::move(Position const &from, Position const &to) {
 		return false;
 	}
 
+	cout << "Moving " << from << " to " << to << endl;
+
 	this->remove_piece(to);
 	this->set(to, target);
 	this->set(from, nullptr);
+
+	target->move();
 
 	return true;
 }
@@ -128,7 +130,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		int dir = (to.get_y() - from.get_y()) / distance;
 
 		for (int i = 1; i < distance; i++) {
-			if (this->get(from + Position(dir * i, 0)) != nullptr) {
+			if (this->get(from + Position(0, dir * i)) != nullptr) {
 				return false;
 			}
 		}

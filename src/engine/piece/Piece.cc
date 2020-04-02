@@ -10,14 +10,15 @@ Position Piece::get_position() {
 }
 
 void Piece::set_position(Position const &position) {
-	if (position != this->get_position()) {
-		this->moved = true;
-	}
 	this->position.set(position);
 }
 
 Color Piece::get_color() const {
 	return this->color;
+}
+
+void Piece::move() {
+	this->moved = true;
 }
 
 bool Piece::was_moved() {

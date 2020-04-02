@@ -20,7 +20,7 @@ bool Bishop::is_move_legal(Position const &dest, Board *board,
 						   bool target_empty) {
 	if (abs(dest.get_x() - get_position().get_x()) ==
 		abs(dest.get_y() - get_position().get_y())) {
-		return true;
+		return board->is_diag_path_clear(this->get_position(), dest);
 	}
 	return false;
 }
