@@ -12,6 +12,9 @@
 using namespace std;
 
 Board::Board() : grid() {
+	black_king = new King(BLACK);
+	white_king = new King(WHITE);
+
 	for (size_t i = 0; i < 8; i++) {
 		this->set(Position(i, 1), new Pawn(WHITE));
 		this->set(Position(i, 6), new Pawn(BLACK));
@@ -20,10 +23,10 @@ Board::Board() : grid() {
 	this->set(Position(7, 0), new Rook(WHITE));
 	this->set(Position(1, 0), new Knight(WHITE));
 	this->set(Position(6, 0), new Knight(WHITE));
-	this->set(Position(2, 0), new Bishop(WHITE));
+	// this->set(Position(2, 0), new Bishop(WHITE));
 	this->set(Position(5, 0), new Bishop(WHITE));
-	this->set(Position(3, 0), new Queen(WHITE));
-	this->set(Position(4, 0), new King(WHITE));
+	// this->set(Position(3, 0), new Queen(WHITE));
+	this->set(Position(4, 0), white_king);
 
 	this->set(Position(7, 7), new Rook(BLACK));
 	this->set(Position(0, 7), new Rook(BLACK));
@@ -31,8 +34,8 @@ Board::Board() : grid() {
 	this->set(Position(6, 7), new Knight(BLACK));
 	this->set(Position(2, 7), new Bishop(BLACK));
 	this->set(Position(5, 7), new Bishop(BLACK));
-	this->set(Position(4, 7), new Queen(BLACK));
-	this->set(Position(3, 7), new King(BLACK));
+	this->set(Position(3, 7), new Queen(BLACK));
+	this->set(Position(4, 7), black_king);
 }
 
 void Board::print() {
@@ -120,7 +123,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		int distance = abs(to.get_x() - from.get_x());
 		int dir = (to.get_x() - from.get_x()) / distance;
 
-		for (int i = 1; i < distance; i++) {
+		for (int i = 1; i < distance - 1; i++) {
 			if (this->get(from + Position(dir * i, 0)) != nullptr) {
 				return false;
 			}
@@ -129,7 +132,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		int distance = abs(to.get_y() - from.get_y());
 		int dir = (to.get_y() - from.get_y()) / distance;
 
-		for (int i = 1; i < distance; i++) {
+		for (int i = 1; i < distance - 1; i++) {
 			if (this->get(from + Position(0, dir * i)) != nullptr) {
 				return false;
 			}
@@ -153,5 +156,42 @@ bool Board::is_diag_path_clear(Position const &from, Position const &to) const {
 		}
 	}
 
+	return true;
+}
+
+Piece *Board::get_king(Color color) {
+	return color == WHITE ? white_king : black_king;
+}
+
+bool Board::do_roque(bool big_roque, Color color) {
+	Piece *tower;
+
+	if (big_roque) {
+		tower = get(Position(color == WHITE ? 0 : 7, color == WHITE ? 0 : 7));
+	} else {
+		tower = get(Position(color == WHITE ? 7 : 0, color == WHITE ? 0 : 7));
+	}
+
+	if (get_king(color)->was_moved())
+		return false;
+
+	if (tower == nullptr || tower->was_moved())
+		return false;
+
+	if (!this->is_straight_path_clear(tower->get_position(),
+									  get_king(color)->get_position()))
+		return false;
+
+	int king_dir =
+		tower->get_position().get_x() - get_king(color)->get_position().get_x();
+	king_dir /= abs(king_dir);
+	int tower_dir = -king_dir;
+
+	set(get_king(color)->get_position(), nullptr);
+	set(get_king(color)->get_position() + Position(2 * king_dir, 0),
+		get_king(color));
+
+	set(tower->get_position(), nullptr);
+	set(get_king(color)->get_position() + Position(tower_dir, 0), tower);
 	return true;
 }

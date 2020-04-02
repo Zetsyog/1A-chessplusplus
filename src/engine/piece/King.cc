@@ -10,7 +10,7 @@ King::King(Color color) : King(color, Position(0, 0)) {
 }
 
 string King::get_name() const {
-	if (this->get_color() == WHITE) {
+	if (this->get_color() == BLACK) {
 		return "\u2654";
 	}
 	return "\u265A";

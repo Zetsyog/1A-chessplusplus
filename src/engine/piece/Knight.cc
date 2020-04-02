@@ -10,7 +10,7 @@ Knight::Knight(Color color) : Knight(color, Position(0, 0)) {
 }
 
 string Knight::get_name() const {
-	if (this->get_color() == WHITE) {
+	if (this->get_color() == BLACK) {
 		return "\u2658";
 	}
 	return "\u265E";

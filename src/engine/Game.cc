@@ -34,6 +34,10 @@ bool Game::execute_command(Command const &command) {
 		return true;
 	}
 
+	if (command.roque != NONE) {
+		return board.do_roque(command.roque == BIG_ROQUE, next_team);
+	}
+
 	if (this->board.get(command.from) != nullptr &&
 		this->board.get(command.from)->get_color() != next_team) {
 		return false;

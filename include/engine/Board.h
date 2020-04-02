@@ -60,8 +60,14 @@ class Board {
 	 */
 	bool is_diag_path_clear(Position const &from, Position const &to) const;
 
+	Piece *get_king(Color color);
+
+	bool do_roque(bool big_roque, Color color);
+
   private:
 	Piece *grid[8][8];
+	Piece *white_king;
+	Piece *black_king;
 };
 
 #endif

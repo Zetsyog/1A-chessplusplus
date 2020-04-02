@@ -11,7 +11,7 @@ Queen::Queen(Color color) : Queen(color, Position(0, 0)) {
 }
 
 string Queen::get_name() const {
-	if (Bishop::get_color() == WHITE) {
+	if (Bishop::get_color() == BLACK) {
 		return "\u2655";
 	}
 	return "\u265B";

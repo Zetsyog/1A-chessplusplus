@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#define NONE 0
+#define BIG_ROQUE 1
+#define LITTLE_ROQUE 2
+
 /**
  * Represents a command input from the user
  */
@@ -17,6 +21,11 @@ class Command {
 	 * The string command that was parsed
 	 */
 	string str;
+
+	/**
+	 * true if the parsed command is a roque
+	 */
+	int roque;
 
 	/**
 	 * The positions once they have been parsed

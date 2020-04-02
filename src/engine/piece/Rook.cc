@@ -10,7 +10,7 @@ Rook::Rook(Color color) : Rook(color, Position(0, 0)) {
 }
 
 string Rook::get_name() const {
-	if (this->get_color() == WHITE) {
+	if (this->get_color() == BLACK) {
 		return "\u2656";
 	}
 	return "\u265C";

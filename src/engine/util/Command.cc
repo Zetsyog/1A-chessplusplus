@@ -6,11 +6,26 @@ bool is_valid_input(string const &cmd) {
 	return cmd.length() == 4 && regex_match(cmd, mouvmtpattern);
 }
 
-Command::Command() : from(0, 0), to(0, 0) {
+bool is_valid_roque(string const &cmd) {
+	regex mouvmtpattern("(O|o|0)-(O|o|0)");
+	return regex_match(cmd, mouvmtpattern);
+}
+
+Command::Command() : roque(NONE), from(0, 0), to(0, 0) {
 }
 
 bool Command::parse() {
 	cin >> str;
+	roque = NONE;
+
+	if (is_valid_roque(str)) {
+		if (str.at(0) == 'o') {
+			roque = LITTLE_ROQUE;
+		} else {
+			roque = BIG_ROQUE;
+		}
+		return true;
+	}
 
 	if (str != "/quit" && !is_valid_input(str)) {
 		return false;

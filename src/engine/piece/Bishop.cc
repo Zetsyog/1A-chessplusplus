@@ -10,7 +10,7 @@ Bishop::Bishop(Color color) : Bishop(color, Position(0, 0)) {
 }
 
 string Bishop::get_name() const {
-	if (this->get_color() == WHITE) {
+	if (this->get_color() == BLACK) {
 		return "\u2657";
 	}
 	return "\u265D";
