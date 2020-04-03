@@ -1,5 +1,8 @@
 #include "engine/util/Position.h"
 
+Position::Position() : Position(0, 0) {
+}
+
 Position::Position(int x, int y) : x(x), y(y) {
 }
 

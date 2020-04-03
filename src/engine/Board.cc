@@ -15,10 +15,10 @@ Board::Board() : grid() {
 	this->black_king = new King(BLACK);
 	this->white_king = new King(WHITE);
 
-	for (size_t i = 0; i < 8; i++) {
-		this->set(Position(i, 1), new Pawn(WHITE));
-		this->set(Position(i, 6), new Pawn(BLACK));
-	}
+	// for (size_t i = 0; i < 8; i++) {
+	// 	this->set(Position(i, 1), new Pawn(WHITE));
+	// 	this->set(Position(i, 6), new Pawn(BLACK));
+	// }
 	this->set(Position(0, 0), new Rook(WHITE));
 	this->set(Position(7, 0), new Rook(WHITE));
 	this->set(Position(1, 0), new Knight(WHITE));
@@ -78,13 +78,13 @@ Piece *Board::get(Position const &position) const {
 	return this->grid[position.get_x()][position.get_y()];
 }
 
-void Board::remove_piece(Position const &position) {
-	if (get(position) != nullptr)
+void Board::remove_piece(Position const &position, bool mem_free) {
+	if (mem_free && get(position) != nullptr)
 		delete get(position);
 	set(position, nullptr);
 }
 
-bool Board::move(Position const &from, Position const &to) {
+bool Board::move(Position const &from, Position const &to, bool mem_free) {
 	Piece *target = this->get(from);
 
 	if (target == nullptr) {
@@ -102,9 +102,7 @@ bool Board::move(Position const &from, Position const &to) {
 		return false;
 	}
 
-	cout << "Moving " << from << " to " << to << endl;
-
-	this->remove_piece(to);
+	this->remove_piece(to, mem_free);
 	this->set(to, target);
 	this->set(from, nullptr);
 
@@ -201,14 +199,9 @@ bool Board::is_king_checked(Color color) {
 
 	Piece *tmp;
 	Position pos = Position(0, 0);
-	for (int i = 0; i < 7; i++) {
-		for (int j = 0; j < 7; j++) {
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
 			pos.set(i, j);
-
-			// we don't want to check if the king check himself
-			if (king->get_position() == pos)
-				continue;
-
 			tmp = get(pos);
 
 			if (tmp == nullptr)

@@ -10,6 +10,7 @@ using namespace std;
  */
 class Position {
   public:
+	Position();
 	Position(int x, int y);
 
 	/**

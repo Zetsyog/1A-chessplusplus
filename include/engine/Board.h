@@ -21,13 +21,13 @@ class Board {
 	 * @param to the targeted position for the piece
 	 * @return true on success
 	 */
-	bool move(Position const &from, Position const &to);
+	bool move(Position const &from, Position const &to, bool free);
 
 	/**
 	 * Remove the piece at a given position
 	 * @param position of the piece to remove
 	 */
-	void remove_piece(Position const &position);
+	void remove_piece(Position const &position, bool free);
 
 	/**
 	 * Set a piece at a given position

@@ -30,6 +30,8 @@ void Game::play() {
 		cerr << "Invalid command. Please try again." << endl;
 	}
 
+	cout << "Moved " << command.from << " to " << command.to << endl;
+
 	next_team = next_team == WHITE ? BLACK : WHITE;
 }
 
@@ -48,5 +50,11 @@ bool Game::execute_command(Command const &command) {
 		return false;
 	}
 
-	return this->board.move(command.from, command.to);
+	Board tmp_board = Board(board);
+	bool move_correct = tmp_board.move(command.from, command.to, false);
+
+	if (move_correct && tmp_board.is_king_checked(next_team)) {
+		return false;
+	}
+	return this->board.move(command.from, command.to, true);
 }
