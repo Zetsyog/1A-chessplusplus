@@ -18,6 +18,11 @@ void Game::print() {
 void Game::play() {
 	Command command;
 
+	if (board.is_king_checked(next_team)) {
+		cout << "Echec aux " << (next_team == WHITE ? "blancs" : "noirs")
+			 << endl;
+	}
+
 	cout << (next_team == WHITE ? "White" : "Black") << " team, your move."
 		 << endl;
 

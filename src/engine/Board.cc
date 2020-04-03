@@ -12,8 +12,8 @@
 using namespace std;
 
 Board::Board() : grid() {
-	black_king = new King(BLACK);
-	white_king = new King(WHITE);
+	this->black_king = new King(BLACK);
+	this->white_king = new King(WHITE);
 
 	for (size_t i = 0; i < 8; i++) {
 		this->set(Position(i, 1), new Pawn(WHITE));
@@ -194,4 +194,33 @@ bool Board::do_roque(bool big_roque, Color color) {
 	set(tower->get_position(), nullptr);
 	set(get_king(color)->get_position() + Position(tower_dir, 0), tower);
 	return true;
+}
+
+bool Board::is_king_checked(Color color) {
+	Piece *king = get_king(color);
+
+	Piece *tmp;
+	Position pos = Position(0, 0);
+	for (int i = 0; i < 7; i++) {
+		for (int j = 0; j < 7; j++) {
+			pos.set(i, j);
+
+			// we don't want to check if the king check himself
+			if (king->get_position() == pos)
+				continue;
+
+			tmp = get(pos);
+
+			if (tmp == nullptr)
+				continue;
+			// ignore piece of same king color
+			if (tmp->get_color() == color)
+				continue;
+
+			if (tmp->is_move_legal(king->get_position(), this, false)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }

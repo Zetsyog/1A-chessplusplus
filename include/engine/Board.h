@@ -64,6 +64,12 @@ class Board {
 
 	bool do_roque(bool big_roque, Color color);
 
+	/**
+	 * @param color the king color
+	 * @return whether the king is in checked or not
+	 */
+	bool is_king_checked(Color color);
+
   private:
 	Piece *grid[8][8];
 	Piece *white_king;
