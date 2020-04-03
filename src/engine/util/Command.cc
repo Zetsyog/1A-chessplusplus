@@ -15,7 +15,9 @@ Command::Command() : roque(NONE), from(0, 0), to(0, 0) {
 }
 
 bool Command::parse() {
-	cin >> str;
+	do {
+		cin >> str;
+	} while (str.at(0) == '#');
 	roque = NONE;
 
 	if (is_valid_roque(str)) {
