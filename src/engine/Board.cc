@@ -6,6 +6,7 @@
 #include "engine/piece/Queen.h"
 #include "engine/piece/Rook.h"
 #include "engine/util/Position.h"
+#include <algorithm>
 #include <cstdlib>
 #include <iostream>
 
@@ -15,17 +16,17 @@ Board::Board() : grid() {
 	this->black_king = new King(BLACK);
 	this->white_king = new King(WHITE);
 
-	// for (size_t i = 0; i < 8; i++) {
-	// 	this->set(Position(i, 1), new Pawn(WHITE));
-	// 	this->set(Position(i, 6), new Pawn(BLACK));
-	// }
+	for (size_t i = 0; i < 8; i++) {
+		this->set(Position(i, 1), new Pawn(WHITE));
+		this->set(Position(i, 6), new Pawn(BLACK));
+	}
 	this->set(Position(0, 0), new Rook(WHITE));
 	this->set(Position(7, 0), new Rook(WHITE));
 	this->set(Position(1, 0), new Knight(WHITE));
 	this->set(Position(6, 0), new Knight(WHITE));
-	// this->set(Position(2, 0), new Bishop(WHITE));
+	this->set(Position(2, 0), new Bishop(WHITE));
 	this->set(Position(5, 0), new Bishop(WHITE));
-	// this->set(Position(3, 0), new Queen(WHITE));
+	this->set(Position(3, 0), new Queen(WHITE));
 	this->set(Position(4, 0), white_king);
 
 	this->set(Position(7, 7), new Rook(BLACK));
@@ -36,6 +37,20 @@ Board::Board() : grid() {
 	this->set(Position(5, 7), new Bishop(BLACK));
 	this->set(Position(3, 7), new Queen(BLACK));
 	this->set(Position(4, 7), black_king);
+
+	Piece *tmp;
+	for (size_t i = 0; i < 8; i++) {
+		for (size_t j = 0; j < 8; j++) {
+			tmp = get(Position(i, j));
+			if (tmp != nullptr) {
+				if (tmp->get_color() == WHITE) {
+					this->white_pieces.push_back(tmp);
+				} else {
+					this->black_pieces.push_back(tmp);
+				}
+			}
+		}
+	}
 }
 
 void Board::print() {
@@ -79,12 +94,26 @@ Piece *Board::get(Position const &position) const {
 }
 
 void Board::remove_piece(Position const &position, bool mem_free) {
-	if (mem_free && get(position) != nullptr)
-		delete get(position);
+	if (get(position) != nullptr) {
+		if (get(position)->get_color() == WHITE) {
+			vector<Piece *>::iterator vec_position =
+				find(white_pieces.begin(), white_pieces.end(), get(position));
+			if (vec_position != white_pieces.end())
+				white_pieces.erase(vec_position);
+		} else {
+			vector<Piece *>::iterator vec_position =
+				find(black_pieces.begin(), black_pieces.end(), get(position));
+			if (vec_position != black_pieces.end())
+				black_pieces.erase(vec_position);
+		}
+		if (mem_free)
+			delete get(position);
+	}
 	set(position, nullptr);
 }
 
-bool Board::move(Position const &from, Position const &to, bool mem_free) {
+bool Board::move(Position const &from, Position const &to,
+				 bool move_effective) {
 	Piece *target = this->get(from);
 
 	if (target == nullptr) {
@@ -92,21 +121,23 @@ bool Board::move(Position const &from, Position const &to, bool mem_free) {
 		return false;
 	}
 
+	target->set_position(from);
+
 	if (this->get(to) != nullptr &&
 		target->get_color() == this->get(to)->get_color()) {
 		return false;
 	}
 
 	if (!target->is_move_legal(to, this, this->get(to) == nullptr)) {
-		cerr << "illegal move" << endl;
 		return false;
 	}
 
-	this->remove_piece(to, mem_free);
+	this->remove_piece(to, move_effective);
 	this->set(to, target);
 	this->set(from, nullptr);
 
-	target->move();
+	if (move_effective)
+		target->move();
 
 	return true;
 }
@@ -216,4 +247,17 @@ bool Board::is_king_checked(Color color) {
 		}
 	}
 	return false;
+}
+
+vector<Piece *> Board::get_pieces(Color color) {
+	return color == BLACK ? black_pieces : white_pieces;
+}
+
+void Board::update_position() {
+	for (size_t i = 0; i < 8; i++) {
+		for (size_t j = 0; j < 8; j++) {
+			if (grid[i][j] != nullptr)
+				grid[i][j]->set_position(Position(i, j));
+		}
+	}
 }

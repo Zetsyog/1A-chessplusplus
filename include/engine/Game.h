@@ -17,7 +17,14 @@ class Game {
 	 * Print the current state of the game in standard output
 	 */
 	void print();
+
 	void play();
+
+	/**
+	 * @param color of the player to see if checkmate
+	 * @return whether the given color is chackmated
+	 */
+	bool is_check_mate(Color color);
 
   private:
 	Board board;

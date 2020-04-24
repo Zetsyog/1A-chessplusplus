@@ -10,7 +10,6 @@ using namespace std;
 class Board;
 
 /**
- * @class Piece
  * @brief represents a piece on the board
  */
 class Piece {
@@ -25,7 +24,7 @@ class Piece {
 	 * @brief set this piece logical position
 	 * Position must also be changed on the board to be effective
 	 */
-	void set_position(Position const &position);
+	virtual void set_position(Position const &position);
 
 	/**
 	 * @return whether this piece was moved since the beginning of the game

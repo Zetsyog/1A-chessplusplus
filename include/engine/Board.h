@@ -3,6 +3,9 @@
 
 #include "engine/piece/Piece.h"
 #include "engine/util/Position.h"
+#include <vector>
+
+using namespace std;
 
 class Board {
   public:
@@ -21,7 +24,7 @@ class Board {
 	 * @param to the targeted position for the piece
 	 * @return true on success
 	 */
-	bool move(Position const &from, Position const &to, bool free);
+	bool move(Position const &from, Position const &to, bool move_effective);
 
 	/**
 	 * Remove the piece at a given position
@@ -35,6 +38,7 @@ class Board {
 	 * @param piece a pointer to the piece. Do nothing if null
 	 */
 	void set(Position const &position, Piece *piece);
+
 	/**
 	 * Get the piece at a given position
 	 * @param position the position of targeted piece
@@ -60,8 +64,18 @@ class Board {
 	 */
 	bool is_diag_path_clear(Position const &from, Position const &to) const;
 
+	/**
+	 * @param color of the wanted king
+	 * @return the king of the given color
+	 */
 	Piece *get_king(Color color);
 
+	/**
+	 * Do the roque for a given player
+	 * @param big_roque the direction of the roque
+	 * @param color the player doing de roque
+	 * @return true on success
+	 */
 	bool do_roque(bool big_roque, Color color);
 
 	/**
@@ -70,8 +84,14 @@ class Board {
 	 */
 	bool is_king_checked(Color color);
 
+	vector<Piece *> get_pieces(Color color);
+
+	void update_position();
+
   private:
 	Piece *grid[8][8];
+	vector<Piece *> white_pieces;
+	vector<Piece *> black_pieces;
 	Piece *white_king;
 	Piece *black_king;
 };
