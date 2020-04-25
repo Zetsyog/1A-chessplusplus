@@ -41,6 +41,7 @@ si après son déplacement, le joueur se mettait en échec (et donc interdire ce
 genre de déplacement) cela s'est rapidement complexifié. C'est devenu plus
 complexe puisque je devais simuler un déplacement sur un plateau fictif et voir
 le conséquences qu'il apportait.
+
 Le problème est que lorsque je clone un Board, les Pieces ne sont pas clonées
 puisqu'elles sont enregistrées dans le tas, là où le reste des variables sont
 dans la pile.
@@ -58,6 +59,7 @@ pas son attribut de classe. C'est pour cela qu'au début de la méthode
 Board::move() je met à jour la position de la piece avec sa vraie position dans
 la grille. Et c'est également ce que fait la méthode Board::update_position(),
 cette dernière a été nécessaire pour l'échec et mat.
+
 Pour l'échec et mat, je l'ai implémenté de manière brutale : si le roi est en
 échec, pour chaque pièce on regarde si chaque case de l'échiquier est un
 mouvement légal, et s'il l'est, si ce mouvement permet d'empecher l'échec.
