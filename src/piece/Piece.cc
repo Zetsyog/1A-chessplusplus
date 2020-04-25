@@ -1,5 +1,5 @@
-#include "engine/piece/Piece.h"
-#include "engine/piece/Color.h"
+#include "piece/Piece.h"
+#include "piece/Color.h"
 
 Piece::Piece(Color color, Position position)
 	: color(color), position(position), moved(false) {

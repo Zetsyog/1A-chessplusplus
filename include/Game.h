@@ -1,12 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "engine/Board.h"
-#include "engine/util/Command.h"
+#include "Board.h"
+#include "util/Command.h"
 
 class Game {
   public:
 	Game();
+	~Game();
 
 	/**
 	 * @return whether the game is running or not

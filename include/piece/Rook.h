@@ -1,16 +1,17 @@
-#ifndef BISHOP_H
-#define BISHOP_H
+#ifndef ROOK_H
+#define ROOK_H
 
-#include "engine/piece/Piece.h"
+#include "piece/Piece.h"
 
-class Bishop : public virtual Piece {
+class Rook : public virtual Piece {
   public:
-	Bishop(Color color, Position position);
-	Bishop(Color color);
+	Rook(Color color, Position position);
+	Rook(Color);
+
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

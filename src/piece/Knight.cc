@@ -1,4 +1,4 @@
-#include "engine/piece/Knight.h"
+#include "piece/Knight.h"
 #include <cstdlib>
 
 using namespace std;

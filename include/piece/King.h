@@ -1,7 +1,7 @@
 #ifndef KING_H
 #define KING_H
 
-#include "engine/piece/Piece.h"
+#include "piece/Piece.h"
 
 class King : public Piece {
   public:
@@ -10,7 +10,7 @@ class King : public Piece {
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

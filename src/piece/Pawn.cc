@@ -1,4 +1,4 @@
-#include "engine/piece/Pawn.h"
+#include "piece/Pawn.h"
 
 Pawn::Pawn(Color color, Position position) : Piece(color, position) {
 }

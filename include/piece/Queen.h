@@ -1,9 +1,9 @@
 #ifndef QUEEN_H
 #define QUEEN_H
 
-#include "engine/piece/Bishop.h"
-#include "engine/piece/Piece.h"
-#include "engine/piece/Rook.h"
+#include "piece/Bishop.h"
+#include "piece/Piece.h"
+#include "piece/Rook.h"
 
 class Queen : public Rook, public Bishop {
   public:
@@ -13,7 +13,7 @@ class Queen : public Rook, public Bishop {
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

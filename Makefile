@@ -18,7 +18,11 @@ all: $(BINDIR)/$(TARGET)
 $(BINDIR)/$(TARGET): $(SOURCES)
 	$(CC) $(CFLAGS) $(SOURCES) -I$(INCLUDEDIR) -o $@
 
+.PHONY: clean test
 
 clean:
 	rm -f $(BINDIR)/$(TARGET)
 	rm -rf $(OBJDIR)/*
+
+test:
+	cd test && ./test-level.sh 5 && ./test-level.sh 6 && cd ..

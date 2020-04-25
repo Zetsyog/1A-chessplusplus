@@ -1,7 +1,7 @@
 #ifndef PAWN_H
 #define PAWN_H
 
-#include "engine/piece/Piece.h"
+#include "piece/Piece.h"
 
 class Pawn : public Piece {
   public:
@@ -11,7 +11,7 @@ class Pawn : public Piece {
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

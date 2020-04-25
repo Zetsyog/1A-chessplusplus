@@ -1,4 +1,4 @@
-#include "engine/piece/Queen.h"
+#include "piece/Queen.h"
 #include <cstdlib>
 
 using namespace std;

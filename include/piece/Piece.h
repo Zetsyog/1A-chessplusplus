@@ -1,8 +1,8 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include "engine/piece/Color.h"
-#include "engine/util/Position.h"
+#include "piece/Color.h"
+#include "util/Position.h"
 #include <iostream>
 
 using namespace std;
@@ -76,6 +76,6 @@ class Piece {
 	bool moved;
 };
 
-#include "engine/Board.h"
+#include "Board.h"
 
 #endif

@@ -1,11 +1,11 @@
-#include "engine/Board.h"
-#include "engine/piece/Bishop.h"
-#include "engine/piece/King.h"
-#include "engine/piece/Knight.h"
-#include "engine/piece/Pawn.h"
-#include "engine/piece/Queen.h"
-#include "engine/piece/Rook.h"
-#include "engine/util/Position.h"
+#include "Board.h"
+#include "piece/Bishop.h"
+#include "piece/King.h"
+#include "piece/Knight.h"
+#include "piece/Pawn.h"
+#include "piece/Queen.h"
+#include "piece/Rook.h"
+#include "util/Position.h"
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
@@ -50,15 +50,6 @@ Board::Board() : grid() {
 				}
 			}
 		}
-	}
-}
-
-Board::~Board() {
-	for (auto const &piece : black_pieces) {
-		delete piece;
-	}
-	for (auto const &piece : white_pieces) {
-		delete piece;
 	}
 }
 
@@ -269,5 +260,14 @@ void Board::update_position() {
 			if (grid[i][j] != nullptr)
 				grid[i][j]->set_position(Position(i, j));
 		}
+	}
+}
+
+void Board::dispose() {
+	for (auto const &piece : black_pieces) {
+		delete piece;
+	}
+	for (auto const &piece : white_pieces) {
+		delete piece;
 	}
 }

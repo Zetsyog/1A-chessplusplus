@@ -1,4 +1,4 @@
-#include "engine/piece/Bishop.h"
+#include "piece/Bishop.h"
 #include <cstdlib>
 
 using namespace std;

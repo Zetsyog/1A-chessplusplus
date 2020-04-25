@@ -1,7 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "engine/util/Position.h"
+#include "util/Position.h"
 #include <iostream>
 
 using namespace std;

@@ -1,17 +1,17 @@
-#ifndef ROOK_H
-#define ROOK_H
+#ifndef KNIGHT_H
+#define KNIGHT_H
 
-#include "engine/piece/Piece.h"
+#include "piece/Piece.h"
 
-class Rook : public virtual Piece {
+class Knight : public Piece {
   public:
-	Rook(Color color, Position position);
-	Rook(Color);
+	Knight(Color color, Position position);
+	Knight(Color color);
 
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

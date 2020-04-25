@@ -1,10 +1,14 @@
-#include "engine/Game.h"
-#include "engine/util/Command.h"
+#include "Game.h"
+#include "util/Command.h"
 #include <iostream>
 
 using namespace std;
 
 Game::Game() : board(), running(true), next_team(WHITE) {
+}
+
+Game::~Game() {
+	board.dispose();
 }
 
 bool Game::is_running() {
@@ -92,6 +96,7 @@ bool Game::execute_command(Command const &command) {
 
 	if (this->board.get(command.from) != nullptr &&
 		this->board.get(command.from)->get_color() != next_team) {
+		cerr << "select a valid piece" << endl;
 		return false;
 	}
 

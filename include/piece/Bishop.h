@@ -1,17 +1,16 @@
-#ifndef KNIGHT_H
-#define KNIGHT_H
+#ifndef BISHOP_H
+#define BISHOP_H
 
-#include "engine/piece/Piece.h"
+#include "piece/Piece.h"
 
-class Knight : public Piece {
+class Bishop : public virtual Piece {
   public:
-	Knight(Color color, Position position);
-	Knight(Color color);
-
+	Bishop(Color color, Position position);
+	Bishop(Color color);
 	/**
 	 * @see Piece::get_name()
 	 */
-	string get_name() const;
+	virtual string get_name() const;
 
 	/**
 	 * @see Piece::is_move_legal()

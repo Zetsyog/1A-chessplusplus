@@ -20,6 +20,12 @@ To cleanup compilation files
 To run the programm simply execute `bin/echecs`
 *Tested on Ubuntu 18 and WSL1*
 
+To run tests use
+
+```bash
+    make test
+```
+
 ## Documentation
 
 See in `doc/html/` folder

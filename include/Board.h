@@ -1,8 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "engine/piece/Piece.h"
-#include "engine/util/Position.h"
+#include "piece/Piece.h"
+#include "util/Position.h"
 #include <vector>
 
 using namespace std;
@@ -10,7 +10,6 @@ using namespace std;
 class Board {
   public:
 	Board();
-	~Board();
 
 	/**
 	 * Print this board to standard output
@@ -86,9 +85,23 @@ class Board {
 	 */
 	bool is_king_checked(Color color);
 
+	/**
+	 * @param color the wanted color of player
+	 * @return the list of all pieces on board of the given player
+	 */
 	vector<Piece *> get_pieces(Color color);
 
+	/**
+	 * Updated logical position of all pieces on board with their current
+	 * position on grid
+	 */
 	void update_position();
+
+	/**
+	 * Free memory of all pieces created
+	 * called when the game end
+	 */
+	void dispose();
 
   private:
 	Piece *grid[8][8];
