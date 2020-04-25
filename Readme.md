@@ -1,6 +1,7 @@
 # Chessplusplus
 
-Object-oriented programming project / 1A/S2
+Object-oriented programming project.
+1A/S2
 
 ## Usage
 
