@@ -128,7 +128,8 @@ bool Board::move(Position const &from, Position const &to,
 		return false;
 	}
 
-	if (!target->is_move_legal(to, this, this->get(to) == nullptr)) {
+	bool target_empty = this->get(to) == nullptr;
+	if (!target->is_move_legal(to, this, target_empty)) {
 		return false;
 	}
 
@@ -137,7 +138,7 @@ bool Board::move(Position const &from, Position const &to,
 	this->set(from, nullptr);
 
 	if (move_effective)
-		target->move();
+		target->move(*this, from, target_empty);
 
 	return true;
 }

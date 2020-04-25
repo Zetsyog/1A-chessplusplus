@@ -29,6 +29,7 @@ class Board {
 	/**
 	 * Remove the piece at a given position
 	 * @param position of the piece to remove
+	 * @param free if true
 	 */
 	void remove_piece(Position const &position, bool free);
 

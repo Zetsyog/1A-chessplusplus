@@ -20,6 +20,7 @@ class Piece {
 	 * @return this piece position
 	 */
 	Position get_position();
+
 	/**
 	 * @brief set this piece logical position
 	 * Position must also be changed on the board to be effective
@@ -32,9 +33,15 @@ class Piece {
 	bool was_moved();
 
 	/**
-	 * mark this piece as moved
+	 * Event method triggered when the piece has effectively been moved to a
+	 * location
+	 * The new piece location is given by calling Piece::get_position()
+	 * @param board the current board
+	 * @param last_pos the last position of this piece
+	 * @param target_empty whether this piece has taken an ennemy piece during
+	 * the move
 	 */
-	void move();
+	virtual void move(Board &board, Position last_pos, bool target_empty);
 
 	/**
 	 * @return the piece color

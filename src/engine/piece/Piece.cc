@@ -17,7 +17,7 @@ Color Piece::get_color() const {
 	return this->color;
 }
 
-void Piece::move() {
+void Piece::move(Board &board, Position last_pos, bool target_empty) {
 	this->moved = true;
 }
 
