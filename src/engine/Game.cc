@@ -37,9 +37,6 @@ void Game::play() {
 		}
 	}
 
-	if (!command.roque)
-		cout << "Moved " << command.from << " to " << command.to << endl;
-
 	next_team = next_team == WHITE ? BLACK : WHITE;
 
 	if (is_check_mate(next_team)) {
@@ -105,9 +102,12 @@ bool Game::execute_command(Command const &command) {
 		if (tmp_board.is_king_checked(next_team)) {
 			cerr << "king is still checked" << endl;
 			return false;
+		} else {
+			cout << "Moved " << command.from << " to " << command.to << endl;
+			return this->board.move(command.from, command.to, true);
 		}
 	} else {
 		cerr << "illegal move" << endl;
+		return false;
 	}
-	return this->board.move(command.from, command.to, true);
 }
