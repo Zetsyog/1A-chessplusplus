@@ -10,6 +10,7 @@ using namespace std;
 class Board {
   public:
 	Board();
+	~Board();
 
 	/**
 	 * Print this board to standard output

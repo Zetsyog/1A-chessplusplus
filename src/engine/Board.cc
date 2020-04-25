@@ -53,6 +53,15 @@ Board::Board() : grid() {
 	}
 }
 
+Board::~Board() {
+	for (auto const &piece : black_pieces) {
+		delete piece;
+	}
+	for (auto const &piece : white_pieces) {
+		delete piece;
+	}
+}
+
 void Board::print() {
 	string space5 = string(5, ' ');
 	cout << endl;
