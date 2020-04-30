@@ -12,9 +12,9 @@ Queen::Queen(Color color) : Queen(color, Position(0, 0)) {
 
 string Queen::get_name() const {
 	if (Bishop::get_color() == BLACK) {
-		return "\u2655";
+		return "\u265B";
 	}
-	return "\u265B";
+	return "\u2655";
 }
 
 bool Queen::is_move_legal(Position const &dest, Board *board,

@@ -23,8 +23,17 @@ void Game::play() {
 	Command command;
 
 	if (board.is_king_checked(next_team)) {
-		cout << "Echec aux " << (next_team == WHITE ? "blancs" : "noirs")
-			 << endl;
+		if (is_check_mate(next_team)) {
+			running = false;
+			cout << "Checkmate !" << endl;
+			cout << "Winner is " << (next_team == WHITE ? "black " : "white ")
+				 << "team." << endl;
+			return;
+		} else {
+			cout << "Check to the "
+				 << (next_team == WHITE ? "white " : "black ") << "king ! "
+				 << endl;
+		}
 	}
 
 	cout << (next_team == WHITE ? "White" : "Black") << " team, your move."
@@ -42,12 +51,6 @@ void Game::play() {
 	}
 
 	next_team = next_team == WHITE ? BLACK : WHITE;
-
-	if (is_check_mate(next_team)) {
-		running = false;
-		cout << "Winner is " << (next_team == WHITE ? "black " : "white ")
-			 << "team." << endl;
-	}
 }
 
 bool Game::is_check_mate(Color color) {
@@ -57,16 +60,17 @@ bool Game::is_check_mate(Color color) {
 		return false;
 
 	Board tmp_board;
-	for (auto const &piece : pieces) {
+	for (auto &piece : pieces) {
 		for (size_t i = 0; i < 8; i++) {
 			for (size_t j = 0; j < 8; j++) {
 				tmp_board = Board(board);
+				tmp_board.update_position();
+
 				Position target_pos = Position(i, j);
 
-				if (target_pos == Position(i, j))
+				if (target_pos == piece->get_position())
 					continue;
 
-				tmp_board.update_position();
 				if (piece->is_move_legal(target_pos, &tmp_board,
 										 tmp_board.get(target_pos) ==
 											 nullptr)) {
@@ -91,6 +95,7 @@ bool Game::execute_command(Command const &command) {
 	}
 
 	if (command.roque != NONE) {
+		cerr << "invalid roque" << endl;
 		return board.do_roque(command.roque == BIG_ROQUE, next_team);
 	}
 
@@ -108,7 +113,7 @@ bool Game::execute_command(Command const &command) {
 			cerr << "king is still checked" << endl;
 			return false;
 		} else {
-			cout << "Moved " << command.from << " to " << command.to << endl;
+			// cout << "Moved " << command.from << " to " << command.to << endl;
 			return this->board.move(command.from, command.to, true);
 		}
 	} else {

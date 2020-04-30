@@ -8,9 +8,9 @@ Pawn::Pawn(Color color) : Pawn(color, Position(0, 0)) {
 
 string Pawn::get_name() const {
 	if (this->get_color() == BLACK) {
-		return "\u2659";
+		return "\u265F";
 	}
-	return "\u265F";
+	return "\u2659";
 }
 
 bool Pawn::is_move_legal(Position const &pos, Board *board, bool target_empty) {

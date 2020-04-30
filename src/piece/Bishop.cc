@@ -11,9 +11,9 @@ Bishop::Bishop(Color color) : Bishop(color, Position(0, 0)) {
 
 string Bishop::get_name() const {
 	if (this->get_color() == BLACK) {
-		return "\u2657";
+		return "\u265D";
 	}
-	return "\u265D";
+	return "\u2657";
 }
 
 bool Bishop::is_move_legal(Position const &dest, Board *board,

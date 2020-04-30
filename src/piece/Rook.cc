@@ -11,9 +11,9 @@ Rook::Rook(Color color) : Rook(color, Position(0, 0)) {
 
 string Rook::get_name() const {
 	if (this->get_color() == BLACK) {
-		return "\u2656";
+		return "\u265C";
 	}
-	return "\u265C";
+	return "\u2656";
 }
 
 bool Rook::is_move_legal(Position const &dest, Board *board,

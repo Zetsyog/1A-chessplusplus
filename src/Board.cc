@@ -153,7 +153,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		int distance = abs(to.get_x() - from.get_x());
 		int dir = (to.get_x() - from.get_x()) / distance;
 
-		for (int i = 1; i < distance - 1; i++) {
+		for (int i = 1; i < distance; i++) {
 			if (this->get(from + Position(dir * i, 0)) != nullptr) {
 				return false;
 			}
@@ -162,7 +162,7 @@ bool Board::is_straight_path_clear(Position const &from,
 		int distance = abs(to.get_y() - from.get_y());
 		int dir = (to.get_y() - from.get_y()) / distance;
 
-		for (int i = 1; i < distance - 1; i++) {
+		for (int i = 1; i < distance; i++) {
 			if (this->get(from + Position(0, dir * i)) != nullptr) {
 				return false;
 			}

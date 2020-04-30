@@ -11,9 +11,9 @@ King::King(Color color) : King(color, Position(0, 0)) {
 
 string King::get_name() const {
 	if (this->get_color() == BLACK) {
-		return "\u2654";
+		return "\u265A";
 	}
-	return "\u265A";
+	return "\u2654";
 }
 
 bool King::is_move_legal(Position const &dest, Board *board,
